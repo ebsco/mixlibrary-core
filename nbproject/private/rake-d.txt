@@ -1,0 +1,7 @@
+build=Build mixlibrary-core-0.0.2.gem into the pkg directory.
+default=
+doc=Create YARD documentation
+install=Build and install mixlibrary-core-0.0.2.gem into system gems.
+integration=Run tests for {:integration=>:build}
+release=Create tag v0.0.2 and build and push mixlibrary-core-0.0.2.gem to Rubygems
+uninstall=
