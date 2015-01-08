@@ -47,6 +47,8 @@ Not Implemented yet
 ## Contributing
     # Run All the Tests on your platform and build the gem
     
+    bundle install    
+
     bundle exec rake
 
 
