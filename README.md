@@ -1,4 +1,5 @@
 # Mixlibrary-Core
+[![Build Status Master](https://api.travis-ci.org/ebsco/mixlibrary-core.svg?branch=master)](https://travis-ci.org/ebsco/mixlibrary-core)
 
 Wraps some provider functionality from chef into easily consumable ruby classes that do not have the extra baggage of being dependent on Chef data objects.  Node object, Environment etc.
 
