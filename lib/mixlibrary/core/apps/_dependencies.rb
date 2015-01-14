@@ -2,3 +2,6 @@
 unless defined?(Chef::Mixin::ShellOut)
   require 'chef'
 end
+unless defined?(Chef::Log)
+  require 'chef'
+end

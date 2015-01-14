@@ -1,6 +1,6 @@
 #Runs powershell scripts with the least amount of intrusion possible.  We do some syntax checking and validation that the script did not end badly, but other than that, we 
 #try to leave the executing script in the hands of the developer.
-
+require "chef"
 require "mixlibrary/core/shell/scripts/windows_script"
 
 module Mixlibrary
@@ -29,7 +29,13 @@ module Mixlibrary
             #only will happen if syntax is incorrect since function is never called
             #2 - Run the user script with exception wraps to guarantee some exit status
             syntax_check()
-            return run_command(shell,flags,filename,file_extension, finalscript(), @options, @validate)
+            
+            myscriptstring = finalscript()
+            Chef::Log::debug("Script Contents:")
+            Chef::Log::debug("-----------------------------------------------------")
+            Chef::Log::debug(myscriptstring)
+            Chef::Log::debug("-----------------------------------------------------")
+            return run_command(shell,flags,filename,file_extension, myscriptstring, @options, @validate)
           end
 
           private
@@ -50,7 +56,7 @@ module Mixlibrary
           #Generally speaking this is the best way to handle this situation.  We will need to determine if there are many dependent scripts
           #that depend on being able to set this setting.
           EXIT_STATUS_INTIALIZATION= <<-EOF 
-          Set-Variable -Name ERRORACTIONPREFERENCE -Value "STOP" -Scope Script -Option "ReadOnly"
+          Set-Variable -Name ERRORACTIONPREFERENCE -Value "STOP" -Scope Script -Option "ReadOnly" -force
           \#$ErrorActionPreference="STOP"
           try{
           EOF
