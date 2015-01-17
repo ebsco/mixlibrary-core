@@ -62,6 +62,7 @@ module Mixlibrary
           EOF
           
           EXIT_STATUS_POST= <<-EOF 
+          exit $LASTEXITCODE
           }
           catch{
             write-error -exception ($_.Exception) -erroraction continue;

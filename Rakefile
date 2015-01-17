@@ -12,10 +12,14 @@ GEM_VERSION=Mixlibrary::Core::VERSION
 
 task :default => :integration
 
+#Run specific test: 
+#   rake integration TESTOPTS="--name=test_run_powershell_script_call -v"
 #Integration tests
 Rake::TestTask.new(:integration => :build) do |t|
     t.test_files = FileList['test/**/*.rb']
   end
+  
+
   
 task :install  do
   sh %{gem install pkg/#{GEM_NAME}-#{GEM_VERSION}.gem --no-rdoc --no-ri}
