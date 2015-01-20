@@ -74,6 +74,21 @@ class Powershell < Minitest::Test
         File.delete(filename)
       end
     end
+    
+    def test_run_powershell_script_call_negative
+      filename = ::File.join(ENV["TEMP"].gsub("\\","/"),"test.ps1");
+      begin
+        File.write(filename, '[Environment]::Exit(-5)')
+        script= <<-EOF
+        #{filename}
+        EOF
+        procobj = Mixlibrary::Core::Shell.windows_script_out(:powershell,script)
+        assert_equal(-5, procobj.exitstatus)
+      ensure
+        
+        File.delete(filename)
+      end
+    end
   
     #Bad call to cmdlet validate it gives back exit code of 1 in this case breaks
     def test_invalid_ps_cmdletcall_fail
