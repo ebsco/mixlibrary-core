@@ -58,6 +58,9 @@ class Powershell < Minitest::Test
       assert_equal(procobj.exitstatus, 1)
       assert(procobj.stderr.lines.count>3)
       assert_equal(procobj.stdout, "")
+      
+      #Validate the error
+      assert(procobj.stderr.include?("Trapped in Catch block"))
     end
     
     def test_run_powershell_script_call
@@ -78,7 +81,7 @@ class Powershell < Minitest::Test
     def test_run_powershell_script_call_negative
       filename = ::File.join(ENV["TEMP"].gsub("\\","/"),"test.ps1");
       begin
-        File.write(filename, '[Environment]::Exit(-5)')
+        File.write(filename, 'exit -5')
         script= <<-EOF
         #{filename}
         EOF
