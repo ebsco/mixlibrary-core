@@ -1,6 +1,6 @@
 module Mixlibrary
   module Core
-    VERSION = "0.0.8"
+    VERSION = "0.0.9"
     NAME = "mixlibrary-core"
   end
 end

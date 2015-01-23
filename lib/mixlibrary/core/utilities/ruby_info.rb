@@ -5,6 +5,14 @@ module Mixlibrary
     module Utilities
       class RubyInfo
         
+        def self.windows?
+          if RUBY_PLATFORM =~ /mswin|mingw|windows/
+            true
+          else
+            false
+          end
+        end
+      
         def self.architecture
           #x64-mingw32
           #i386-mingw32
