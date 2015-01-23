@@ -17,6 +17,9 @@ Or install it yourself as:
 
     $ gem install mixlibrary-core
 
+## How to Install via Chef Recipe
+* [Recipe Install Sample](https://github.com/ebsco/mixlibrary-core/blob/master/Samples/SampleRecipeDeployment.rb)
+		
 ## Documentation
 * Uses yard to document classes and methods.  Generate docs or automatic documentation: http://www.rubydoc.info
     *       rake doc
