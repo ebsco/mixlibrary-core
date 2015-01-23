@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "minitest-reporters"
   
   
-  spec.add_dependency "chef" , "~> 11.16"
+  spec.add_dependency "chef" , ">= 11.16", "< 13"
   spec.add_dependency "win32-api" , ">= 1.5.1"
   
   

@@ -40,10 +40,18 @@ module Mixlibrary
 
           private
           
+          EXIT_STATUS_EXITCONVERSION = <<-EOF
+          \#This function changes the exit code as desired back to ruby code.
+            function exit-mixlibpowershell([int] $exitcode){
+              [Environment]::Exit($exitcode)
+            }
+          EOF
+          
           EXIT_STATUS_EXCEPTION_HANDLER=  <<-EOF
             trap [Exception]{
+              write-error "Trapped in Trap Exception block" -erroraction continue;
               write-error -exception ($_.Exception.Message) -erroraction continue;
-              exit 1
+              exit-mixlibpowershell 1
             }
           EOF
           
@@ -56,17 +64,19 @@ module Mixlibrary
           #Generally speaking this is the best way to handle this situation.  We will need to determine if there are many dependent scripts
           #that depend on being able to set this setting.
           EXIT_STATUS_INTIALIZATION= <<-EOF 
+          
           Set-Variable -Name ERRORACTIONPREFERENCE -Value "STOP" -Scope Script -Option "ReadOnly" -force
           \#$ErrorActionPreference="STOP"
           try{
           EOF
           
           EXIT_STATUS_POST= <<-EOF 
-          exit $LASTEXITCODE
+          exit-mixlibpowershell $LASTEXITCODE
           }
           catch{
+            write-error "Trapped in Catch block" -erroraction continue;
             write-error -exception ($_.Exception) -erroraction continue;
-            exit 1
+            exit-mixlibpowershell 1
           }
           EOF
           
@@ -85,6 +95,7 @@ module Mixlibrary
           
           def finalscript
             changed_script =
+              EXIT_STATUS_EXITCONVERSION +
               EXIT_STATUS_EXCEPTION_HANDLER +
               EXIT_STATUS_RESET_SCRIPT +
               EXIT_STATUS_INTIALIZATION +
