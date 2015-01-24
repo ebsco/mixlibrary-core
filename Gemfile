@@ -1,5 +1,4 @@
 
 source 'https://rubygems.org'
+gemspec :name => "mixlibrary-core"
 
-# Specify your gem's dependencies in mixlib-scriptout.gemspec
-gemspec
