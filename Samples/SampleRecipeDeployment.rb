@@ -1,34 +1,34 @@
-gem_version="0.0.9"
+gem_version="0.0.12"
 
 myexecuteaction = execute 'gem update --system' do
-  not_if do	
-			def isgreater
-				output=`"gem" -v`
-				puts "Version found: #{output}"
-				
-				myvar=output.gsub(/\s+/, "")
-				individual=myvar.split(".") 
-				 raise "Invalid version detected" if individual.length < 2
-				 
-				#Greater than or equal to 2.4
-				return false if individual[0].to_i < 2
-				return false if individual[1].to_i < 4	
-				
-				return true
-			end
-			
-			retval = isgreater()
-			puts "Is greater:#{retval}"
-			#return  --- Cannot use the return statement - breaks chef DSL apparently
-			retval
-	end
+  not_if do 
+     
+    def isgreater
+      #The Gem executable version needs to be a certain
+      myver=Gem::Version.new(Gem::VERSION)
+      versionsegments=myver.segments 
+      Chef::Log::debug("Version found: #{myver}")
+        
+      #Greater than or equal to 2.4
+      raise "Invalid version detected" if versionsegments.length < 2
+      return false if versionsegments[0] < 2
+      return false if versionsegments[1] < 4  
+        
+      return true
+    end
+      
+    ::Gem.clear_paths 
+    retval = isgreater()
+    Chef::Log::debug("Is greater:#{retval}")
+    #return  --- Cannot use the return statement - breaks chef D apparently
+    retval
+  end
+  action :nothing
 end
 
 myexecuteaction.run_action(:run)
 
-
-
-mycustomgem = gem_package "my_gem_package_resource" do
+mycustomgem = gem_package "eis_lib_chefcore_install_mixlibrary_core" do
   package_name "mixlibrary-core"
   options "--minimal-deps" 
   version gem_version
