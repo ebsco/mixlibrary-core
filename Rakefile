@@ -1,7 +1,8 @@
 require 'rubygems'
 require 'rubygems/package_task'
 require 'rake/testtask'
-require 'mixlibrary/core/version'
+
+require File.dirname(__FILE__) + '/lib/mixlibrary/core/version'
 
 GEM_NAME    = Mixlibrary::Core::NAME
 GEM_VERSION =  Mixlibrary::Core::VERSION
