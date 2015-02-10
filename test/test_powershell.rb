@@ -1,7 +1,7 @@
 require_relative 'spec_helper'
 require 'mixlibrary/core/apps/shell'
 
-class Powershell < Minitest::Test
+class TestPowershell < Minitest::Test
 
   #only run the tests if on a windows machine
   if(windows?)
@@ -58,9 +58,10 @@ class Powershell < Minitest::Test
       assert_equal(procobj.exitstatus, 1)
       assert(procobj.stderr.lines.count>3)
       assert_equal(procobj.stdout, "")
-      
+
       #Validate the error
-      assert(procobj.stderr.include?("Trapped in Catch block"))
+      mystring=procobj.stderr.gsub("\n","").gsub("\r","")
+      assert(mystring.include?("Trapped in Catch block"))
     end
     
     def test_run_powershell_script_call
@@ -138,15 +139,32 @@ class Powershell < Minitest::Test
       #puts "send_sample_shell_args"
       script= <<-EOF
       write-host $pwd
+      exit 2
       EOF
     
       procobj = Mixlibrary::Core::Shell.windows_script_out(:powershell,script, {:returns => [0,2],:cwd => 'C:/'})
       #puts "ERROR LOOKING #{procobj.inspect}"
-      assert_equal(procobj.exitstatus, 0)
+      assert_equal(procobj.exitstatus, 2)
       assert_equal(procobj.stderr,'')
       assert_equal(procobj.stdout , "C:\\\n")
     
     end
+
+
+    def test_send_sample_shell_args_timeout
+      script= <<-EOF
+      write-host $pwd
+      sleep -seconds 60
+      EOF
+
+      assert_raises Mixlib::ShellOut::CommandTimeout do
+        procobj = Mixlibrary::Core::Shell.windows_script_out(:powershell,script, {:timeout => 1})
+      end
+
+
+
+    end
+
   
     def test_send_invalid_shell_args_without_checking
       #puts "send_invalid_shell_args"

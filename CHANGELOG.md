@@ -1,3 +1,6 @@
+## un-released
+Added timeout test
+
 ## 0.0.12
  * Preliminary design to work on linux and windows
  * Sample recipe to deploy to show how to work with Chef 11
