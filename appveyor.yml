@@ -7,8 +7,8 @@ platform:
 environment:
   matrix:
     - ruby_version: "200"
-    - ruby_version: "210"
-    - ruby_version: "220"
+    - ruby_version: "21"
+    - ruby_version: "22"
 
 clone_folder: c:\projects\mixlibrary-core
 clone_depth: 1
