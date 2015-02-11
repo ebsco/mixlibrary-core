@@ -3,8 +3,9 @@
 [![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://www.rubydoc.info/gems/mixlibrary-core/frames)
 
 [![Gem Version](https://badge.fury.io/rb/mixlibrary-core.svg)](https://github.com/ebsco/mixlibrary-core/releases)
-[![Build Status](https://api.travis-ci.org/ebsco/mixlibrary-core.svg?branch=master)](https://travis-ci.org/ebsco/mixlibrary-core)
+[![Build Status - Linux](https://api.travis-ci.org/ebsco/mixlibrary-core.svg?branch=master)](https://travis-ci.org/ebsco/mixlibrary-core)
 [![License](http://img.shields.io/badge/license-Apache2-yellowgreen.svg)](https://github.com/ebsco/mixlibrary-core/blob/master/LICENSE.txt)
+[![Build status - Windows](https://ci.appveyor.com/api/projects/status/0d26tuv87r13b27r/branch/master?svg=true)](https://ci.appveyor.com/project/carpnick/mixlibrary-core/branch/master)
 
 Wraps some provider functionality from chef into easily consumable ruby classes that do not have the extra baggage of being dependent on Chef data objects.  Node object, Environment etc.
 
