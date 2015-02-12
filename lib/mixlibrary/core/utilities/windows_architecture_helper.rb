@@ -1,4 +1,5 @@
-require 'win32/api' if Chef::Platform.windows?
+require 'mixlibrary/core/utilities/ruby_info'
+require 'win32/api' if Mixlibrary::Core::Utilities::RubyInfo.windows?
 
 module Mixlibrary
   module Core
