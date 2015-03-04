@@ -7,8 +7,8 @@ class TestWindowsFeature < Minitest::Test
   if(windows?)
 
     #Make the hello world test to validate basic powershell is working
-    def test_installiis
-      myclass=Mixlibrary::Core::Windows::Features.new("Web-Server")
+    def test_install_feature
+      myclass=Mixlibrary::Core::Windows::Features.new("NLB")
 
       assert(myclass.is_installed? == false, "IIS was found to be installed")
       assert(myclass.is_feature_available? == true, "Failed to detect feature being available")
