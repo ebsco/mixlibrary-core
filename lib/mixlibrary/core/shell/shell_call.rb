@@ -6,7 +6,7 @@ module Mixlibrary
       class ShellCall
         include Chef::Mixin::ShellOut
         
-        def intialize ()
+        def initialize
           
         end
       
