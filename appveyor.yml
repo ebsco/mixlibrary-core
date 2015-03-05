@@ -10,9 +10,6 @@ environment:
 
 clone_folder: c:\projects\mixlibrary-core
 clone_depth: 1
-branches:
-  only:
-    - master
 
 install:
   - winrm quickconfig -q
