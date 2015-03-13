@@ -15,17 +15,6 @@ module Mixlibrary
           @feature_name=feature_name
         end
 
-        def install_feature()
-          Chef::Log.info("Installing feature:#{@feature_name}")
-          script= <<-EOF
-            import-module ServerManager;
-            Add-WindowsFeature -Name "#{@feature_name}"
-          EOF
-
-          procobj = Mixlibrary::Core::Shell.windows_script_out!(:powershell, script)
-          Chef::Log.debug("Command output: #{procobj.stdout}")
-        end
-
         def remove_feature()
           Chef::Log.info("Removing feature:#{@feature_name}")
           script= <<-EOF
