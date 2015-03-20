@@ -41,13 +41,26 @@ module Mixlibrary
           Chef::Log.info("Is feature available:#{@feature_name}")
           script= <<-EOF
             import-module ServerManager;
-            Get-WindowsFeature -Name #{@feature_name}
+            $myvar=@(get-WindowsFeature -Name #{@feature_name})
+
+            if($myvar.Count -eq 0){
+                write-host "Found no matching features"
+                exit 6
+            }
+
+          write-host "Printing Matching Features"
+          foreach($myfeature in $myvar){
+            $myfeature | ft -Property FeatureType,DisplayName,Name,InstallState,Installed | Out-Host
+          }
+
+          exit 5
+
           EOF
 
-          procobj = Mixlibrary::Core::Shell.windows_script_out!(:powershell, script)
+          procobj = Mixlibrary::Core::Shell.windows_script_out(:powershell, script)
           Chef::Log.info("Command output:#{procobj.stdout}")
 
-          return procobj.stderr.empty? && procobj.stdout !~ /Removed/i
+          return procobj.stderr.empty? && procobj.stdout !~ /Removed/i && procobj.exitstatus==5
         end
 
         def is_installed?
