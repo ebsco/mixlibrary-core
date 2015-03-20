@@ -20,6 +20,9 @@ class TestWindowsFeature < Minitest::Test
       myclass.remove_feature()
       assert(myclass.is_installed? == false, "IIS was found to be installed")
 
+      invalidfeature=Mixlibrary::Core::Windows::Features.new("myrandomfeature")
+      assert(invalidfeature.is_feature_available? == false, "Failed to verify the feature is not available")
+
     end
   end  
 end
