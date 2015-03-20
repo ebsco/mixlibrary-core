@@ -1,5 +1,11 @@
 ## un-released
-Added timeout test
+
+## 0.0.14
+ * Fix for is_feature_available? method.  Added unit test call for it as well.
+
+## 0.0.13
+ * Added timeout test
+ * Added Windows Feature support
 
 ## 0.0.12
  * Preliminary design to work on linux and windows
