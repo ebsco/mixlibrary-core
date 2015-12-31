@@ -31,10 +31,7 @@ module Mixlibrary
             syntax_check()
             
             myscriptstring = finalscript()
-            Chef::Log::debug("Script Contents:")
-            Chef::Log::debug("-----------------------------------------------------")
-            Chef::Log::debug(myscriptstring)
-            Chef::Log::debug("-----------------------------------------------------")
+            
             return run_command(shell,flags,filename,file_extension, myscriptstring, @options, @validate)
           end
 
