@@ -23,7 +23,6 @@ module Mixlibrary
           EOF
 
           procobj = Mixlibrary::Core::Shell.windows_script_out!(:powershell, script)
-          Chef::Log.debug("Command output: #{procobj.stdout}")
         end
 
         def install_feature()
@@ -34,7 +33,6 @@ module Mixlibrary
           EOF
 
           procobj = Mixlibrary::Core::Shell.windows_script_out!(:powershell, script)
-          Chef::Log.debug("Command output: #{procobj.stdout}")
         end
 
         def is_feature_available?()
@@ -58,7 +56,6 @@ module Mixlibrary
           EOF
 
           procobj = Mixlibrary::Core::Shell.windows_script_out(:powershell, script)
-          Chef::Log.info("Command output:#{procobj.stdout}")
 
           return procobj.stderr.empty? && procobj.stdout !~ /Removed/i && procobj.exitstatus==5
         end
@@ -75,7 +72,6 @@ module Mixlibrary
           EOF
 
           procobj = Mixlibrary::Core::Shell.windows_script_out!(:powershell, script)
-          Chef::Log.debug("Command output:#{procobj.stdout}")
           procobj.stderr.empty? && (procobj.stdout =~ /False/i) == nil && (procobj.stdout =~ /true/i) != nil
 
         end

@@ -86,14 +86,28 @@ module Mixlibrary
               create_file()
       
               shellclass=Shell::ShellCall.new
+
+              Chef::Log::debug("Script Contents:")
+              Chef::Log::debug("-----------------------------------------------------")
+              Chef::Log::debug(@code)
+              Chef::Log::debug("-----------------------------------------------------")
+              
+              result = nil
+              
               if(eval_error)  
                 result = shellclass.shell!("#{@exe} #{@flags} #{@script_file.path}", @shellout_options)
-                return result  
               else
                 result = shellclass.shell("#{@exe} #{@flags} #{@script_file.path}", @shellout_options)
-                return result
               end
-            
+              
+              unless result.nil?
+                Chef::Log.debug("Command output:#{result.stdout}")
+                Chef::Log.debug("Command Error:#{result.stderr}")
+                Chef::Log.debug("Command Exit Code:#{result.exitstatus}")
+              end
+              
+              return result
+
             rescue  Exception => e  
               #puts e.message  
               #puts e.backtrace.inspect  
